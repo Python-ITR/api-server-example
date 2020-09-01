@@ -1,4 +1,4 @@
-import { Min, IsDefined } from 'class-validator';
+import { IsDefined } from 'class-validator';
 
 export class CreateStoryDto {
   @IsDefined()
