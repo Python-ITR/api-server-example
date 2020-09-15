@@ -7,6 +7,7 @@ import {
   Options,
   Param,
   Patch,
+  Delete,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -20,8 +21,7 @@ export class StoriesController {
 
   @Header('Access-Control-Allow-Origin', '*')
   @Options()
-  options(): void {
-  }
+  options(): void {}
 
   @Get()
   getList(): Promise<StoryEntity[]> {
@@ -31,6 +31,11 @@ export class StoriesController {
   @Get('/:id')
   getStoryById(@Param('id') id: string): Promise<StoryEntity> {
     return this.stories_service.getStoryById(parseInt(id));
+  }
+
+  @Delete('/:id')
+  deleteStoryById(@Param('id') id: string): Promise<StoryEntity> {
+    return this.stories_service.deleteStoryById(parseInt(id));
   }
 
   @Header('Access-Control-Allow-Origin', '*')

@@ -27,6 +27,12 @@ export class StoriesService {
     return story;
   }
 
+  async deleteStoryById(id: number): Promise<StoryEntity> {
+    const story = this.stories_repository.findOne(id);
+    this.stories_repository.delete(id);
+    return story;
+  }
+
   async changeStoryById(
     id: number,
     values: UpdateStoryDto,
