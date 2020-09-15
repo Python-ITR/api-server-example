@@ -3,6 +3,8 @@ import {
   Get,
   Body,
   Post,
+  Header,
+  Options,
   Param,
   Patch,
   UsePipes,
@@ -16,6 +18,11 @@ import { StoriesService } from './stories.service';
 export class StoriesController {
   constructor(private readonly stories_service: StoriesService) {}
 
+  @Header('Access-Control-Allow-Origin', '*')
+  @Options()
+  options(): void {
+  }
+
   @Get()
   getList(): Promise<StoryEntity[]> {
     return this.stories_service.getStories();
@@ -26,6 +33,7 @@ export class StoriesController {
     return this.stories_service.getStoryById(parseInt(id));
   }
 
+  @Header('Access-Control-Allow-Origin', '*')
   @UsePipes(ValidationPipe)
   @Post()
   addNewStory(@Body() body: CreateStoryDto): Promise<StoryEntity> {
